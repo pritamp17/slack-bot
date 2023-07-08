@@ -7,3 +7,4 @@ module.exports = (app) => {
   // Handle unhandled errors
   app.error(slackController.handleError);
 };
+
