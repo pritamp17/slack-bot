@@ -15,3 +15,5 @@ slackbot.db
 *.sublime-*
 *.swp
 *~
+
+package-lock.json
