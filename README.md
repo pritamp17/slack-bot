@@ -31,7 +31,7 @@ slack-bot using nodejs
    - In the left sidebar, click on "OAuth & Permissions".
    -  get `Bot User OAuth Token` which is our `SLACK_BOT_TOKEN`
    - Scroll down to the "Scopes" section and add the necessary scopes for your app's functionality.
-   - For bot integration, you may need scopes like `channels:history`, `channels:join`, `chat:write`, `im:read`. `im:history`, `mpim:read`
+   - For bot integration, we will need scopes like `channels:history`, `channels:join`, `chat:write`, `im:read`. `im:history`, `mpim:read`
    - Click on "Save Changes" to save your scope selections.
 
 4. Install your app in your workspace:
