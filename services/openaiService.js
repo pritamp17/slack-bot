@@ -1,6 +1,5 @@
 const { Configuration, OpenAIApi } = require("openai");
 require('dotenv').config();
-console.log(process.env.OPENAI_API_KEY)
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
 });
@@ -9,7 +8,8 @@ const configuration = new Configuration({
 const openaiClient = new OpenAIApi(configuration);
 
 async function generateSqlQuery(messageText) {
-  const prompt = `Given a message "${messageText}", generate a SQL query.`;
+  const dbcolumns = "id INTEGER PRIMARY KEY AUTOINCREMENT, android_manufacture TEXT, android_model TEXT, android_os_version TEXT, android_app_version TEXT, acquisition_campaign TEXT, acquisition_source TEXT, city TEXT, state TEXT, onboarding_time INTEGER, phone_carrier TEXT, phone_screen_dpi INTEGER, phone_screen_height INTEGER, phone_screen_width INTEGER, name TEXT, age INTEGER";
+  const prompt = `Given a message "${messageText}", generate a SQL query that will work in sqlite3 database. and this is my sqlite3 table "${dbcolumns}" generate a SQL query that will work in sqlite3 database`;
 
   try {
     const completion = await openaiClient.createCompletion({
