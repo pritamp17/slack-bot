@@ -1,7 +1,8 @@
 const sqlite3 = require('sqlite3').verbose();
-
 // Initialize SQLite database
-const db = new sqlite3.Database('slackbot.db');
+const db = new sqlite3.Database('./test.db',sqlite3.OPEN_READWRITE, (err) => {
+  if (err) throw err;
+});
 
 // Create a table if it doesn't exist
 db.run(`CREATE TABLE IF NOT EXISTS data (

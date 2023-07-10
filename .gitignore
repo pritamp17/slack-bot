@@ -17,3 +17,5 @@ slackbot.db
 *~
 
 package-lock.json
+
+.server.js
