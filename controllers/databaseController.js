@@ -4,7 +4,7 @@ const db = new sqlite3.Database('./users.db',sqlite3.OPEN_READWRITE, (err) => {
   if (err) throw err;
 });
 
-// Create a table if it doesn't exist
+
 function addData(
   android_manufacture,
   android_model,
@@ -71,7 +71,13 @@ function addData(
 }
 
 function executeQuery(sqlQuery, callback) {
-  db.get(sqlQuery, callback);
+  db.all(sqlQuery, (err, rows) => {
+    if (err) {
+      console.error(err.message);
+      return callback(err);
+    }
+    return callback(null, rows);
+  });
 }
 
 module.exports = {
