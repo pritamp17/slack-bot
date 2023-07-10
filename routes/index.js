@@ -1,4 +1,5 @@
 const slackController = require('../controllers/slackController');
+const cron = require('node-cron');
 
 module.exports = (app) => {
   
@@ -7,12 +8,9 @@ module.exports = (app) => {
 
   app.event('app_mention', slackController.handleMessage);
   
-  // Command handler for sending hourly routine messages
-  app.command('/hourly-routine', slackController.handleHourlyRoutine);
-
-  app.event('url_verification', async ({ event, say }) => {
-    console.log(event.type);
-    return event.challenge;
+  cron.schedule('0 * * * *', () => {
+    slackController.handleHourlyRoutine(app);
   });
+
 };
 

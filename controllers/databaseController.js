@@ -1,29 +1,10 @@
 const sqlite3 = require('sqlite3').verbose();
-// Initialize SQLite database
-const db = new sqlite3.Database('./test.db',sqlite3.OPEN_READWRITE, (err) => {
+
+const db = new sqlite3.Database('./users.db',sqlite3.OPEN_READWRITE, (err) => {
   if (err) throw err;
 });
 
 // Create a table if it doesn't exist
-db.run(`CREATE TABLE IF NOT EXISTS data (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  android_manufacture TEXT,
-  android_model TEXT,
-  android_os_version TEXT,
-  android_app_version TEXT,
-  acquisition_campaign TEXT,
-  acquisition_source TEXT,
-  city TEXT,
-  state TEXT,
-  onboarding_time INTEGER,
-  phone_carrier TEXT,
-  phone_screen_dpi INTEGER,
-  phone_screen_height INTEGER,
-  phone_screen_width INTEGER, 
-  name TEXT, 
-  age INTEGER
-)`);
-
 function addData(
   android_manufacture,
   android_model,
@@ -38,13 +19,12 @@ function addData(
   phone_screen_dpi, 
   phone_screen_height, 
   phone_screen_width, 
- name, 
- age,  
- callback
+  name, 
+  age,  
+  callback
 ) {
- // Insert the data into the database
- db.run(
-    `INSERT INTO data (
+  db.run(
+    `INSERT INTO users (
        android_manufacture,
        android_model,
        android_os_version,
@@ -58,9 +38,9 @@ function addData(
        phone_screen_dpi ,  
        phone_screen_height ,  
        phone_screen_width ,   
-      name ,   
-      age   
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+       name ,   
+       age   
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     [
       android_manufacture || '',
       android_model || '',
@@ -87,7 +67,7 @@ function addData(
        // Return the inserted data ID
        return callback(null, this.lastID);
     }
- );
+  );
 }
 
 function executeQuery(sqlQuery, callback) {
