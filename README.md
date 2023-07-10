@@ -29,27 +29,23 @@ slack-bot using nodejs
 
 3. Configure your app:
    - In the left sidebar, click on "OAuth & Permissions".
+   -  get `Bot User OAuth Token` which is our `SLACK_BOT_TOKEN`
    - Scroll down to the "Scopes" section and add the necessary scopes for your app's functionality.
    - For bot integration, you may need scopes like `channels:history`, `channels:join`, `chat:write`, `im:read`. `im:history`, `mpim:read`
    - Click on "Save Changes" to save your scope selections.
 
-5. Install your app in your workspace:
+4. Install your app in your workspace:
    - In the left sidebar, click on "Install App".
    - Review the requested scopes and click on `"Allow"` to install the app in your workspace.
 
-6. Retrieve OAuth access tokens:
-   - In the left sidebar, click on "OAuth & Permissions".
-   - Under the `& Redirect URLs"` section, you will find your `Bot User OAuth Token` which is our `SLACK_BOT_TOKEN`.
-     - Make sure to copy this token as it will be required for authenticating requests from your app.
-
-7. Set up event subscriptions:
+5. Set up event subscriptions:
    - In the left sidebar, click on "Event Subscriptions".
    - Enable events by toggling the switch at the top right of the page.
    - `Enter a Request URL where Slack can send event notifications`  `url/slack/events`.
    - Note- url is one which we get after running `ngrok http 3017`
    - Subscribe to specific events related to bot integration  `app_mention`, `message.im` .
    - Click on "Save Changes" to save your event subscription settings.
-   - 
-9. Install the app to your workspace:
-   - In the left sidebar, click on "App Home".
-   - Click on "Install App to Workspace" and follow any additional prompts.
+
+# after running project locally 
+- install app on channel
+- @botname question ?
