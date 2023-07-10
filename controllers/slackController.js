@@ -4,11 +4,10 @@ require('dotenv').config();
 
 async function handleMessage({ event, say }) {
   try {
-    console.log(event);
     const queryText = event.text.toLowerCase();
-    if (queryText.includes('how many users from') && queryText.includes('use')) {
-      const location = queryText.split('from')[1].split('use')[0].trim();
-      const phoneBrand = queryText.split('use')[1].trim();
+    if (queryText.includes('how many users') && queryText.includes('use')) {
+      // const location = queryText.split('from')[1].split('use')[0].trim();
+      // const phoneBrand = queryText.split('use')[1].trim();
 
       const sqlQuery = await openaiService.generateSqlQuery(queryText);
       console.log("sql query :",sqlQuery)
@@ -17,10 +16,8 @@ async function handleMessage({ event, say }) {
           console.error(err);
           return;
         }
-
         const userCount = row.userCount;
-
-        say(`The number of users from ${location} using ${phoneBrand} phones is ${userCount}`);
+        say(`${userCount}`);
       });
     } else if (queryText.includes('how many users joined yesterday')) {
       const yesterdayDate = new Date();
@@ -36,7 +33,7 @@ async function handleMessage({ event, say }) {
 
         const userCount = row.userCount;
 
-        say(`The number of users who joined yesterday is ${userCount}`);
+        say(`${userCount}`);
       });
     } else {
       say("I'm sorry, I couldn't understand your query. Please try again.");

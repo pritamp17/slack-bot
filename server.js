@@ -1,6 +1,6 @@
 const express = require('express');
 const { App, ExpressReceiver } = require('@slack/bolt');
-const addData = require('./controllers/databaseController');
+const {addData} = require('./controllers/databaseController');
 const slackapp = require('./routes/index');
 
 require('dotenv').config();
@@ -60,7 +60,7 @@ expressApp.post('/api/data', (req, res) => {
     age
   } = req.body;
 
-  // Call the addData function from the databaseController
+  
   addData(
     android_manufacture || '',
     android_model || '',
