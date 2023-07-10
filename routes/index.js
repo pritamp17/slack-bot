@@ -8,7 +8,7 @@ module.exports = (app) => {
 
   app.event('app_mention', slackController.handleMessage);
   
-  cron.schedule('0 * * * *', () => {
+  cron.schedule('0 * * * *', () => {  
     slackController.handleHourlyRoutine(app);
   });
 
