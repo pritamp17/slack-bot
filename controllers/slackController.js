@@ -40,7 +40,13 @@ async function handleMessage({ event, say }) {
         });
   
         const rows = await executeQueryPromise;
-        userCount = rows.length;
+        if (rows[0]['COUNT(*)']) {
+          userCount = rows[0]['COUNT(*)'];
+        } else if (rows[0].num_users) {
+          userCount = rows[0].num_users;
+        } else {
+          userCount = 0;
+        }
       }
     } else {
       say("I'm sorry, I couldn't understand your query. Please try again.");
