@@ -9,7 +9,7 @@ const openaiClient = new OpenAIApi(configuration);
 
 async function generateSqlQuery(messageText) {
   const dbcolumns = "id INTEGER PRIMARY KEY AUTOINCREMENT, android_manufacture TEXT, android_model TEXT, android_os_version TEXT, android_app_version TEXT, acquisition_campaign TEXT, acquisition_source TEXT, city TEXT, state TEXT, onboarding_time INTEGER, phone_carrier TEXT, phone_screen_dpi INTEGER, phone_screen_height INTEGER, phone_screen_width INTEGER, name TEXT, age INTEGER";
-  const prompt = `Given a message "${messageText}", generate a SQL query that will work in sqlite3 database. and this is my sqlite3 table "${dbcolumns}" generate a SQL query that will work in sqlite3 database name users and just write query `;
+  const prompt = `Given a message "${messageText}", generate a SQL query that will work in sqlite3 database. and this is my sqlite3 table "${dbcolumns}" generate a SQL query that will work in sqlite3 database, my table name is users and everything is case sensitive and return just correct formated sql query with correct row and column names as "${dbcolumns}"`;
 
   try {
     const completion = await openaiClient.createCompletion({
@@ -32,7 +32,6 @@ async function generateSqlQuery(messageText) {
     return generatedText;
 
   } catch (error) {
-    // console.error('openAI error:', error);
     throw error;
   }
 }

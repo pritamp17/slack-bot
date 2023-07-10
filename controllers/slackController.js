@@ -5,41 +5,51 @@ require('dotenv').config();
 async function handleMessage({ event, say }) {
   try {
     const queryText = event.text.toLowerCase();
-    if (queryText.includes('how many users') && queryText.includes('use')) {
-      // const location = queryText.split('from')[1].split('use')[0].trim();
-      // const phoneBrand = queryText.split('use')[1].trim();
-
+    let userCount;
+    
+    if (queryText.includes('how many users')) {
       const sqlQuery = await openaiService.generateSqlQuery(queryText);
-      console.log("sql query :",sqlQuery)
-      databaseController.executeQuery(sqlQuery, (err, row) => {
-        if (err) {
-          console.error(err);
-          return;
-        }
-        const userCount = row.userCount;
-        say(`${userCount}`);
-      });
-    } else if (queryText.includes('how many users joined yesterday')) {
-      const yesterdayDate = new Date();
-      yesterdayDate.setDate(yesterdayDate.getDate() - 1);
-
-      const sqlQuery = await openaiService.generateSqlQuery(queryText);
-      console.log("sql query :",sqlQuery)
-      databaseController.executeQuery(sqlQuery, (err, row) => {
-        if (err) {
-          console.error(err);
-          return;
-        }
-
-        const userCount = row.userCount;
-
-        say(`${userCount}`);
-      });
+      console.log("sql query :", sqlQuery);
+      
+      if (sqlQuery.includes('COUNT(*)')) {
+        const executeQueryPromise = new Promise((resolve, reject) => {
+          databaseController.executeQuery(sqlQuery, (err, rows) => {
+            if (err) {
+              console.error(err);
+              reject(err);
+              return;
+            }
+            console.log(rows);
+            resolve(rows);
+          });
+        });
+  
+        const rows = await executeQueryPromise;
+        userCount = rows[0]['COUNT(*)'];
+      } else {
+        const executeQueryPromise = new Promise((resolve, reject) => {
+          databaseController.executeQuery(sqlQuery, (err, rows) => {
+            if (err) {
+              console.error(err);
+              reject(err);
+              return;
+            }
+            console.log(rows);
+            resolve(rows);
+          });
+        });
+  
+        const rows = await executeQueryPromise;
+        userCount = rows.length;
+      }
     } else {
       say("I'm sorry, I couldn't understand your query. Please try again.");
+      return;
     }
+    
+    say(`The number of users is: ${userCount}`);
   } catch (error) {
-    console.error('Error resolving in sqlite:', error);
+    console.error('Error resolving in SQLite:', error);
     throw error;
   }
 }
