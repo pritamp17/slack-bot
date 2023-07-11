@@ -48,6 +48,10 @@ slack-bot using nodejs
    - Subscribe to specific events related to bot integration  `app_mention`, `message.im` .
    - Click on "Save Changes" to save your event subscription settings.
 
+# for getting OPENAI_API_KEY
+- https://platform.openai.com/account/api-keys
+- generate api key and add it to .env and docker-compose.yml
+
 # after running project locally 
 - install app on channel
 - @botname question ?
