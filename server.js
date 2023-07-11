@@ -40,7 +40,7 @@ process.on('SIGTERM', async () => {
 
 
 
-// Define the route for storing data
+// route for storing data in sqlite
 expressApp.post('/api/data', (req, res) => {
   const {
     android_manufacture,
@@ -83,7 +83,7 @@ expressApp.post('/api/data', (req, res) => {
         return res.status(500).json({ error: 'An error occurred while saving the data.' });
       }
 
-      // Return the inserted data ID
+      
       return res.json({ id: dataId });
    }
   );
