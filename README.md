@@ -1,7 +1,6 @@
 # slack-bot
 slack-bot using nodejs
-
-[![demo vedio]([demo](https://drive.google.com/file/d/1rhKPfvADVqnMVGUdbkfqehj2_I-dp-wX/view?usp=sharing)
+[Demo Vedio](https://drive.google.com/file/d/1rhKPfvADVqnMVGUdbkfqehj2_I-dp-wX/view?usp=sharing)
 
 # Run Project locally
 - clone this repo
