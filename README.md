@@ -19,6 +19,7 @@ slack-bot using nodejs
 - run `ngrok http 3017`
 # Or for running with docker
 - https://docs.google.com/document/d/1HEeIWt88mwyKyhW_n-WPfbRginbTVQkmdNwxC7kdj4U/edit
+- [setting project with docker - demo Vedio](https://youtu.be/m3TFpUya_8Y)
 # Creating a Slack App and getting  SLACK_SIGNING_SECRET and  SLACK_BOT_TOKEN
 
 ## Steps
