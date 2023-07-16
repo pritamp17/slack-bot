@@ -25,7 +25,11 @@ async function handleMessage({ event, say }) {
         });
   
         const rows = await executeQueryPromise;
+        if (typeof rows === 'undefined') {
+          userCount = 0;
+        }else{
         userCount = rows[0]['COUNT(*)'];
+        }
       } else {
         const executeQueryPromise = new Promise((resolve, reject) => {
           databaseController.executeQuery(sqlQuery, (err, rows) => {
@@ -40,12 +44,14 @@ async function handleMessage({ event, say }) {
         });
   
         const rows = await executeQueryPromise;
-        if (rows[0]['COUNT(*)']) {
+        if (typeof rows === 'undefined') {
+          userCount = 0;
+        } else if (rows[0]['COUNT(*)']) {
           userCount = rows[0]['COUNT(*)'];
         } else if (rows[0].num_users) {
           userCount = rows[0].num_users;
         } else {
-          userCount = 0;
+          userCount = rows.length;
         }
       }
     } else {
