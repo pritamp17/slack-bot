@@ -1,8 +1,8 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const { App, ExpressReceiver } = require('@slack/bolt');
-const {addData} = require('./controllers/databaseController');
-const slackapp = require('./routes/index');
-
+const slackapp = require('./routes/slackRoutes');
+const expressRoutes = require('./routes/dbApiRoutes');
 require('dotenv').config();
 
 // instance of the Bolt app
@@ -19,6 +19,8 @@ slackapp(app);
 
 const expressApp = express();
 expressApp.use(express.json());
+expressApp(bodyParser.json());
+expressApp.use('/user',expressRoutes)
 
 
 // Start the Bolt app and the Express server
@@ -38,55 +40,5 @@ process.on('SIGTERM', async () => {
   process.exit(0);
 });
 
-
-
-// Define the route for storing data
-expressApp.post('/api/data', (req, res) => {
-  const {
-    android_manufacture,
-    android_model,
-    android_os_version,
-    android_app_version,
-    acquisition_campaign,
-    acquisition_source,
-    city,
-    state,
-    onboarding_time,
-    phone_carrier,
-    phone_screen_dpi,
-    phone_screen_height,
-    phone_screen_width,
-    name,
-    age
-  } = req.body;
-
-  
-  addData(
-    android_manufacture || '',
-    android_model || '',
-    android_os_version || '',
-    android_app_version || '',
-    acquisition_campaign || '',  
-    acquisition_source || '',  
-    city || '',  
-    state || '',  
-    onboarding_time || 0,  
-   phone_carrier || '',  
-   phone_screen_dpi || 0,  
-   phone_screen_height || 0,  
-   phone_screen_width || 0, 
-   name || '', 
-   age || 0, 
-   (err, dataId) => {
-      if (err) {
-        console.error(err);
-        return res.status(500).json({ error: 'An error occurred while saving the data.' });
-      }
-
-      // Return the inserted data ID
-      return res.json({ id: dataId });
-   }
-  );
-});
 
 module.exports = expressApp;

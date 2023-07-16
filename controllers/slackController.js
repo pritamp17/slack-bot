@@ -45,7 +45,7 @@ async function handleMessage({ event, say }) {
         } else if (rows[0].num_users) {
           userCount = rows[0].num_users;
         } else {
-          userCount = 0;
+          userCount = rows.length;
         }
       }
     } else {
