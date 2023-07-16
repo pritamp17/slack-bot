@@ -62,6 +62,11 @@ slack-bot using nodejs
 - https://platform.openai.com/account/api-keys
 - generate api key and add it to .env and docker-compose.yml
 
-# after running project locally 
-- install app on channel
-- @botname question ?
+# Design 
+- Used Nodejs As the Backend of the APP and sqlite3 as the database.
+- Used Slack-Bolt Framework for creating a Slack-bot
+- used OpenAI's API for converting questions to SQL query
+
+# After running the project locally 
+- install the app on any slack channel
+- @botname question?
