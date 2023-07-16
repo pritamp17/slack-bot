@@ -18,8 +18,18 @@ slack-bot using nodejs
 - download and install ngrok from https://dashboard.ngrok.com/get-started/setup
 - run `ngrok http 3017`
 # Or for running with docker
-- https://docs.google.com/document/d/1HEeIWt88mwyKyhW_n-WPfbRginbTVQkmdNwxC7kdj4U/edit?usp=sharing
-- [setting project with docker - demo Vedio](https://youtu.be/5i3YxZZ5HU0)
+- fill the env variables In docker-compose.yml file and save file
+- Open a terminal
+- cd to project dir
+- `docker-compose build`
+- `docker-compose up`
+-  open new terminal
+     - `ngrok http 3017`
+     - copy the url generated
+     - in api.slack.com create new app
+     - at events & subscription section paste **url/slack/events**  url is which we get after running `ngrok http 3017`
+- [**setting project with docker - demo Vedio**](https://youtu.be/5i3YxZZ5HU0)
+ 
 # Creating a Slack App and getting  SLACK_SIGNING_SECRET and  SLACK_BOT_TOKEN
 
 ## Steps
