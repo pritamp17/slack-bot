@@ -2,6 +2,7 @@ const openaiService = require('../services/openaiService');
 const databaseController = require('./databaseController');
 require('dotenv').config();
 
+
 async function handleMessage({ event, say }) {
   try {
     const queryText = event.text.toLowerCase();
@@ -52,12 +53,12 @@ async function handleMessage({ event, say }) {
           userCount = rows.length;
         }
       }
+      
+      say(`The number of users is: ${userCount}`);
     } else {
       say("I'm sorry, I couldn't understand your query. Please try again.");
       return;
     }
-    
-    say(`The number of users is: ${userCount}`);
   } catch (error) {
     console.error('Error resolving in SQLite:', error);
     throw error;

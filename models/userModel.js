@@ -5,24 +5,25 @@ const db = new sqlite3.Database('./users.db',sqlite3.OPEN_READWRITE, (err) => {
 });
 
 db.serialize(() => {
-    db.run(`CREATE TABLE IF NOT EXISTS users (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        android_manufacture TEXT,
-        android_model TEXT,
-        android_os_version TEXT,
-        android_app_version TEXT,
-        acquisition_campaign TEXT,
-        acquisition_source TEXT,
-        city TEXT,
-        state TEXT,
-        onboarding_time INTEGER,
-        phone_carrier TEXT,
-        phone_screen_dpi INTEGER,
-        phone_screen_height INTEGER,
-        phone_screen_width INTEGER,
-        name TEXT,
-        age INTEGER`);
-  });
+  db.run(`CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    android_manufacture TEXT,
+    android_model TEXT,
+    android_os_version TEXT,
+    android_app_version TEXT,
+    acquisition_campaign TEXT,
+    acquisition_source TEXT,
+    city TEXT,
+    state TEXT,
+    onboarding_time INTEGER,
+    phone_carrier TEXT,
+    phone_screen_dpi INTEGER,
+    phone_screen_height INTEGER,
+    phone_screen_width INTEGER,
+    name TEXT,
+    age INTEGER
+  )`);
+});
 
   function addData(
     android_manufacture,

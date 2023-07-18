@@ -1,4 +1,4 @@
-const express = require('express');
+var express = require('express')
 const bodyParser = require('body-parser');
 const { App, ExpressReceiver } = require('@slack/bolt');
 const slackapp = require('./routes/slackRoutes');
@@ -11,7 +11,7 @@ const receiver = new ExpressReceiver({
   processBeforeResponse: true,
 });
 
-const app = new App({
+const app = new App({ 
   token: process.env.SLACK_BOT_TOKEN,
   receiver,
 });
@@ -19,8 +19,8 @@ slackapp(app);
 
 const expressApp = express();
 expressApp.use(express.json());
-expressApp(bodyParser.json());
-expressApp.use('/user',expressRoutes)
+expressApp.use(bodyParser.json());
+expressApp.use('/user',expressRoutes);
 
 
 // Start the Bolt app and the Express server
@@ -34,10 +34,9 @@ expressApp.use('/user',expressRoutes)
   });
 })();
 
-
 process.on('SIGTERM', async () => {
   await app.stop();
   process.exit(0);
 });
 
-module.exports = expressApp;
+
