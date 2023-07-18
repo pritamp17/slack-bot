@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const { App, ExpressReceiver } = require('@slack/bolt');
 const slackapp = require('./routes/slackRoutes');
-const expressRoutes = require('./routes/dbApiRoutes');
+const expressRoutes = require('./routes/expressRoutes');
 require('dotenv').config();
 
 // instance of the Bolt app

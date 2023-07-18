@@ -46,8 +46,6 @@ async function handleMessage({ event, say }) {
         const rows = await executeQueryPromise;
         if (typeof rows === 'undefined') {
           userCount = 0;
-        } else if (rows[0]['COUNT(*)']) {
-          userCount = rows[0]['COUNT(*)'];
         } else if (rows[0].num_users) {
           userCount = rows[0].num_users;
         } else {
